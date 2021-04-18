@@ -18,7 +18,6 @@ import AboutComponent from './AboutComponent.vue';
 import WebsiteAnalysisComponent from './WebsiteAnalysisComponent.vue';
 import EcoLensForm from './EcoLensForm.vue';
 import { WebsiteAnalysis } from '../domain/WebsiteAnalysis';
-import { AnalysisResults } from '@/domain/AnalysisResults';
 
 @Component({
   components: {
@@ -31,7 +30,6 @@ export default class EcoLensContainer extends Vue {
   @Prop() private msg!: string;
   
   websiteAnalysis: WebsiteAnalysis = WebsiteAnalysis.EMPTY();
-  analysisResults: AnalysisResults[] = [];
 
   get languages(): Array<object> {
     const languages = [
@@ -48,8 +46,8 @@ export default class EcoLensContainer extends Vue {
 
   private async addWebsiteAnalysis(websiteAnalysis: WebsiteAnalysis): Promise<void>{
     this.websiteAnalysis = websiteAnalysis;
-    this.analysisResults = await this.websiteAnalysis.getCssCoverageResults();
-    console.log(this.analysisResults);
+    this.websiteAnalysis.cssAnalysisResults = await this.websiteAnalysis.getCssCoverageResults();
+    console.log(this.websiteAnalysis.getCssCoverageResults());
   }
 }
 </script>

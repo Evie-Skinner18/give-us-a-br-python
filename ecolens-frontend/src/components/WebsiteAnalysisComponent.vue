@@ -1,7 +1,9 @@
 <template>
     <div>
        <h1>EcoLens results for {{ websiteAnalysis.url }}</h1>
-       <p>Ooh, this website uses a lot of CSS it doesn't need </p>
+       <p v-if="websiteAnalysis.getUnusedCssBytes()">
+           This website is not using {{ websiteAnalysis.getUnusedCssBytes() }} of its total CSS bytes! 
+       </p>
     </div>   
 </template>
 
